@@ -2273,3 +2273,18 @@ html[data-theme="dark"] .quran-ayah-tools button:hover {
     .quran-surah-heading { top: -12px; }
     .quran-ayah-list { line-height: 2.05; }
 }
+
+.brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.brand-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}

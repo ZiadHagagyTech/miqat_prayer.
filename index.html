@@ -1,0 +1,598 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#102b24">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="مِيقات">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="icons/miqat-192.png" type="image/png">
+    <link rel="apple-touch-icon" href="icons/miqat-192.png">
+    <meta name="description" content="مِيقات - مواقيت الصلاة واتجاه القبلة والأذكار اليومية">
+
+    <title>مِيقات | رفيقك للصلاة والذكر</title>
+
+    <link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <a class="brand" href="#home" aria-label="مِيقات - الصفحة الرئيسية">
+            <span class="brand-icon">م</span>
+            <span>
+                <strong>مِيقات</strong>
+                <small>رفيقك للصلاة والذكر</small>
+            </span>
+        </a>
+
+        
+<nav class="nav-links" aria-label="القائمة الرئيسية">
+    <a class="nav-link" href="#home">الرئيسية</a>
+    <a class="nav-link" href="#prayers">مواقيت الصلاة</a>
+    <a class="nav-link" href="#quran">القرآن الكريم</a>
+    <a class="nav-link" href="#qibla">اتجاه القبلة</a>
+    <a class="nav-link" href="#adhkar">الأذكار</a>
+    <a class="nav-link" href="#tasbeeh">المسبحة</a>
+    <a class="nav-link" href="#features">خدماتنا</a>
+</nav>
+
+
+        <div class="header-actions">
+            <button class="install-app-button" id="installAppButton" type="button" hidden>
+                <span aria-hidden="true">⇩</span> تثبيت التطبيق
+            </button>
+            <button class="theme-button" id="themeButton" type="button"
+                    aria-label="تغيير مظهر الموقع">
+                <span id="themeIcon">☾</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="container" id="home">
+
+        <section class="hero">
+            <div class="hero-content">
+                <span class="eyebrow">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
+
+                <h1>اجعل الصلاة <span>نور يومك</span></h1>
+
+                <p>
+                    تابع مواقيت الصلاة، واعرف اتجاه القبلة،
+                    واجعل الذكر رفيقك في كل وقت.
+                </p>
+
+                <a href="#prayers" class="primary-button">
+                    عرض مواقيت الصلاة <span>←</span>
+                </a>
+            </div>
+
+            <div class="hero-decoration" aria-hidden="true">
+                <div class="crescent">☾</div>
+                <div class="star star-one">✦</div>
+                <div class="star star-two">✧</div>
+                <div class="star star-three">✦</div>
+                <div class="arch"></div>
+            </div>
+        </section>
+
+        <section class="date-bar" aria-label="تاريخ اليوم">
+            <div>
+                <span class="info-label">التاريخ الميلادي</span>
+                <strong id="gregorianDate">جارٍ تحميل التاريخ...</strong>
+            </div>
+
+            <div class="date-divider"></div>
+
+            <div>
+                <span class="info-label">التاريخ الهجري</span>
+                <strong id="hijriDate">جارٍ تحميل التاريخ...</strong>
+            </div>
+
+            <div class="location-box">
+                <label for="citySelect">مدينتك</label>
+                <select id="citySelect" aria-label="اختر محافظتك ومدينتك"></select>
+            </div>
+        </section>
+
+        <section class="section-block" id="prayers">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker">لا تنسَ صلاتك</span>
+                    <h2>مواقيت الصلاة</h2>
+                    <p id="prayerSubtitle">مواقيت اليوم حسب المدينة المختارة</p>
+                </div>
+
+                <button class="refresh-button" id="refreshButton" type="button">
+                    ↻ تحديث المواقيت
+                </button>
+            </div>
+
+            <div class="next-prayer-card">
+                <div class="next-prayer-info">
+                    <span class="next-label">الصلاة القادمة</span>
+                    <h3 id="nextPrayerName">جارٍ تحديد الصلاة القادمة...</h3>
+                    <p id="nextPrayerTime">--:--</p>
+                </div>
+
+                <div class="countdown-area">
+                    <span>الوقت المتبقي للصلاة</span>
+                    <div class="countdown" id="countdown">--:--:--</div>
+                    <small id="countdownHint">يتم حساب الوقت تلقائيًا</small>
+                </div>
+            </div>
+<div class="prayer-grid" id="prayerGrid">
+                <article class="prayer-card">
+                    <span>الفجر</span>
+                    <strong>--:--</strong>
+                </article>
+                <article class="prayer-card">
+                    <span>الشروق</span>
+                    <strong>--:--</strong>
+                </article>
+                <article class="prayer-card">
+                    <span>الظهر</span>
+                    <strong>--:--</strong>
+                </article>
+                <article class="prayer-card">
+                    <span>العصر</span>
+                    <strong>--:--</strong>
+                </article>
+                <article class="prayer-card">
+                    <span>المغرب</span>
+                    <strong>--:--</strong>
+                </article>
+                <article class="prayer-card">
+                    <span>العشاء</span>
+                    <strong>--:--</strong>
+                </article>
+            </div>
+
+            <p class="source-note" id="statusMessage" role="status">
+                جارٍ الاتصال بخدمة مواقيت الصلاة...
+            </p>
+
+        
+<!-- جدول مواقيت الصلاة الشهري -->
+<div class="monthly-prayers-section" id="monthlyPrayers">
+
+    <div class="monthly-prayers-heading">
+        <div>
+            <span class="section-kicker">نظرة على الشهر</span>
+            <h3>جدول مواقيت الصلاة الشهري</h3>
+            <p>تابع مواقيت الصلاة اليومية حسب المدينة المختارة.</p>
+        </div>
+
+        <div class="monthly-prayers-controls">
+            <button
+                class="secondary-button"
+                id="previousMonthButton"
+                type="button"
+            >
+                الشهر السابق
+            </button>
+
+            <strong id="monthlyPrayersMonth">
+                جارٍ تحميل الشهر...
+            </strong>
+
+            <button
+                class="secondary-button"
+                id="nextMonthButton"
+                type="button"
+            >
+                الشهر التالي
+            </button>
+        </div>
+    </div>
+
+    <!-- تصدير مواقيت الصلاة السنوية PDF -->
+    <div class="annual-export-controls" dir="rtl">
+
+        <div class="annual-export-info">
+            <h3>التقويم السنوي لمواقيت الصلاة</h3>
+
+            <p>
+                حمّل مواقيت الصلاة لجميع شهور السنة في تقرير
+                جاهز للطباعة والحفظ بصيغة PDF.
+            </p>
+        </div>
+
+        <div class="annual-export-actions">
+
+            <label for="annualPrayerYear">السنة</label>
+
+            <select id="annualPrayerYear">
+                <!-- تُضاف السنوات تلقائيًا باستخدام JavaScript -->
+            </select>
+
+            <button
+                type="button"
+                id="downloadAnnualPrayerPdf"
+            >
+                <span aria-hidden="true">📄</span>
+                تحميل الجدول السنوي PDF
+            </button>
+
+        </div>
+
+        <p
+            id="annualPrayerExportStatus"
+            class="annual-export-status"
+            role="status"
+            aria-live="polite"
+        ></p>
+
+    </div>
+
+    <!-- حالة تحميل الجدول الشهري -->
+    <p class="source-note" id="monthlyPrayersStatus" role="status">
+        جارٍ تحميل مواقيت الشهر...
+    </p>
+
+    <!-- جدول المواقيت -->
+    <div class="monthly-prayers-table-wrapper">
+
+        <table class="monthly-prayers-table">
+
+            <thead>
+                <tr>
+                    <th>اليوم</th>
+                    <th>التاريخ الهجري</th>
+                    <th>الفجر</th>
+                    <th>الشروق</th>
+                    <th>الظهر</th>
+                    <th>العصر</th>
+                    <th>المغرب</th>
+                    <th>العشاء</th>
+                </tr>
+            </thead>
+
+            <tbody id="monthlyPrayersBody">
+                <tr>
+                    <td colspan="8">جارٍ تحميل البيانات...</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+        </section>
+
+        
+
+<section class="section-block quran-section" id="quran">
+  <div class="section-heading">
+    <div>
+      <span class="section-kicker">نورٌ وهداية</span>
+      <h2>القرآن الكريم</h2>
+      <p>اقرأ القرآن الكريم، وابحث في الآيات، واستمع إلى التلاوات، واطّلع على التفسير الميسّر.</p>
+    </div>
+  </div>
+
+  <div class="quran-toolbar">
+    <label>السورة
+      <select id="quranSurahSelect" aria-label="اختر السورة"><option value="1">جارٍ تحميل السور...</option></select>
+    </label>
+    <label>القارئ
+      <select id="quranReciter">
+        <option value="ar.abdulbasitmurattal" selected>عبدالباسط عبدالصمد (الافتراضي)</option>
+        <option value="ar.alafasy">مشاري العفاسي</option>
+        <option value="ar.abdurrahmaansudais">عبدالرحمن السديس</option>
+        <option value="ar.husary">محمود خليل الحصري</option>
+        <option value="ar.minshawi">محمد صديق المنشاوي</option>
+        <option value="ar.shaatree">أبو بكر الشاطري</option>
+      </select>
+    </label>
+    <button class="primary-button" id="quranLoadButton" type="button">عرض السورة</button>
+  </div>
+  <div class="quran-search-row">
+    <label for="quranSearchInput">البحث في السورة</label>
+    <input id="quranSearchInput" type="search" placeholder="اكتب كلمة للبحث في آيات السورة..." autocomplete="off">
+    <button class="secondary-button" id="quranSearchButton" type="button">بحث</button>
+    <button class="secondary-button" id="quranClearSearch" type="button">إلغاء البحث</button>
+  </div>
+  <div class="quran-resume" id="quranResumeCard" hidden>
+    <span id="quranResumeText">آخر موضع قراءة محفوظ</span>
+    <button class="secondary-button" id="quranResumeButton" type="button">متابعة القراءة</button>
+  </div>
+  <p class="quran-status" id="quranStatus" role="status" aria-live="polite">سيتم تحميل بيانات القرآن عند فتح هذا القسم. يلزم الاتصال بالإنترنت.</p>
+  <div class="quran-reading-layout">
+    <div class="quran-reading-panel" id="quranTextPanel">
+      <div class="quran-surah-heading"><span id="quranSurahMeta">سورة الفاتحة</span><h3 id="quranSurahTitle">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</h3></div>
+      <div class="quran-ayah-list" id="quranAyahList"><p class="quran-placeholder">جارٍ تجهيز المصحف...</p></div>
+    </div>
+  </div>
+  <div class="quran-audio-card">
+    <div><span class="section-kicker">استمع وتدبّر</span><h3 id="quranAudioTitle">تلاوة السورة</h3><p>قد يختلف توفر التسجيل حسب السورة والقارئ واتصال الإنترنت.</p></div>
+    <div class="quran-audio-controls"><button class="secondary-button" id="quranPlaySurahButton" type="button">استمع للسورة كاملة</button><audio id="quranAudioPlayer" controls preload="none">المتصفح لا يدعم تشغيل الصوت.</audio></div>
+  </div>
+  <div class="quran-tafsir-panel" id="quranTafsirPanel">
+    <div class="quran-tafsir-heading"><div><span class="section-kicker">معاني الآيات</span><h3>التفسير الميسّر</h3></div><span class="quran-source-tag">مصدر خارجي</span></div>
+    <p id="quranTafsirText">اضغط على زر «التفسير» أسفل أي آية لعرض تفسيرها.</p>
+    <small>يعرض الموقع التفسير الميسّر من خدمة بيانات خارجية عند توفرها. يُرجى الرجوع إلى مصدر موثوق عند الحاجة إلى التحقق العلمي.</small>
+  </div>
+</section>
+
+<section class="section-block" id="qibla">
+
+    <div class="section-heading">
+        <div>
+            <span class="section-kicker">أينما كنت</span>
+            <h2>اتجاه القبلة</h2>
+            <p>اعرف اتجاه الكعبة المشرفة من موقعك الحالي.</p>
+        </div>
+    </div>
+
+    <div class="qibla-layout">
+
+        <div class="qibla-compass-card">
+            <span class="compass-caption">بوصلة القبلة</span>
+
+            <div class="compass" id="qiblaCompass"
+                 role="img" aria-label="بوصلة توضح اتجاه القبلة">
+
+                <span class="compass-direction north">N</span>
+                <span class="compass-direction east">E</span>
+                <span class="compass-direction south">S</span>
+                <span class="compass-direction west">W</span>
+
+                <div class="compass-inner"></div>
+
+                <div class="qibla-needle" id="qiblaNeedle">
+                    <span class="needle-tip"></span>
+                    <span class="needle-label">القبلة</span>
+                </div>
+
+                <div class="compass-center">م</div>
+            </div>
+
+            <p class="compass-help" id="compassHelp">
+                حدّد موقعك أولًا لحساب اتجاه القبلة.
+            </p>
+        </div>
+
+        <div class="qibla-info-card">
+            <span class="section-kicker">موقعك واتجاهك</span>
+            <h3>اعرف اتجاه الصلاة</h3>
+
+            <p>
+                اسمح باستخدام موقعك لحساب اتجاه الكعبة
+                من مكانك الحالي.
+            </p>
+
+            <button class="primary-button qibla-button"
+                    id="locateButton" type="button">
+                <span>⌖</span>
+                تحديد موقعي وحساب القبلة
+            </button>
+
+            <div class="qibla-result">
+                <span>اتجاه القبلة من الشمال الحقيقي</span>
+                <strong id="qiblaAngle">--°</strong>
+                <small id="qiblaDirection">لم يتم تحديد الموقع بعد</small>
+            </div>
+
+            <div class="qibla-location">
+                <span>موقعك الحالي</span>
+                <strong id="qiblaLocation">لم يتم تحديد الموقع</strong>
+            </div>
+
+            <div class="compass-status" id="deviceCompassStatus"
+                 role="status">
+                البوصلة لم تبدأ بعد.
+            </div>
+
+            <p class="qibla-disclaimer">
+                للحصول على نتيجة أدق، أبعد الهاتف عن المعادن
+                والمغناطيس، وعاير البوصلة إذا لزم الأمر.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+        
+<section class="section-block" id="features">
+    <div class="section-heading">
+        <div>
+            <span class="section-kicker">عباداتك في مكان واحد</span>
+            <h2>اكتشف خدمات مِيقات</h2>
+            <p>كل ما تحتاجه للصلاة والذكر في مكان واحد.</p>
+        </div>
+    </div>
+
+    <div class="features-grid">
+
+        <a class="feature-card feature-link" href="#quran"><div class="feature-icon">۞</div><h3>القرآن الكريم</h3><p>اقرأ القرآن واستمع للتلاوة واطّلع على التفسير الميسّر.</p><span class="feature-action">افتح المصحف ←</span></a>
+
+        <a class="feature-card feature-link" href="#qibla">
+            <div class="feature-icon">⌖</div>
+            <h3>اتجاه القبلة</h3>
+            <p>اعرف اتجاه الكعبة من موقعك وتعرّف على زاوية القبلة.</p>
+            <span class="feature-action">اكتشف اتجاه القبلة ←</span>
+        </a>
+
+        <a class="feature-card feature-link" href="#adhkar">
+            <div class="feature-icon">☼</div>
+            <h3>الأذكار اليومية</h3>
+            <p>تابع أذكار الصباح والمساء وبعد الصلاة واحفظ تقدمك.</p>
+            <span class="feature-action">ابدأ الأذكار ←</span>
+        </a>
+
+        <a class="feature-card feature-link" href="#tasbeeh">
+            <div class="feature-icon">◉</div>
+            <h3>المسبحة الإلكترونية</h3>
+            <p>سبّح واختر الذكر والعدد المستهدف واحفظ تسبيحاتك.</p>
+            <span class="feature-action">ابدأ التسبيح ←</span>
+        </a>
+
+    </div>
+</section>
+
+
+
+                <!-- قسم الأذكار اليومية -->
+        <section class="section-block" id="adhkar">
+
+            <div class="section-heading">
+                <div>
+                    <span class="section-kicker">ذكر الله يطمئن القلوب</span>
+                    <h2>الأذكار اليومية</h2>
+                    <p>خصص لحظات من يومك لذكر الله، وتابع تقدمك بسهولة.</p>
+                </div>
+            </div>
+
+            <div class="adhkar-tabs">
+                <button class="adhkar-tab active" data-category="morning" type="button">
+                    أذكار الصباح
+                </button>
+
+                <button class="adhkar-tab" data-category="evening" type="button">
+                    أذكار المساء
+                </button>
+
+                <button class="adhkar-tab" data-category="prayer" type="button">
+                    بعد الصلاة
+                </button>
+            </div>
+
+            <div class="adhkar-progress-card">
+                <div class="adhkar-progress-info">
+                    <span id="adhkarProgressText">تقدمك اليوم</span>
+                    <strong id="adhkarProgressCount">0 / 0</strong>
+                </div>
+
+                <div class="adhkar-progress-track">
+                    <div class="adhkar-progress-fill" id="adhkarProgressFill"></div>
+                </div>
+            </div>
+
+            <div class="adhkar-list" id="adhkarList">
+                <!-- الأذكار هتظهر هنا تلقائيًا من JavaScript -->
+            </div>
+
+            <div class="adhkar-complete-message" id="adhkarCompleteMessage" hidden>
+                أحسنت! انتهيت من الأذكار الموجودة في هذا القسم.
+            </div>
+
+            <div class="adhkar-reset-wrapper">
+                <button class="secondary-button" id="resetAdhkarButton" type="button">
+                    إعادة تعيين التقدم
+                </button>
+            </div>
+
+        </section>
+
+        
+<!-- المسبحة الإلكترونية -->
+<section class="section-block" id="tasbeeh">
+
+    <div class="section-heading">
+        <div>
+            <span class="section-kicker">اذكر الله في كل وقت</span>
+            <h2>المسبحة الإلكترونية</h2>
+            <p>اجعل لسانك عامرًا بذكر الله، وتابع تسبيحاتك بسهولة.</p>
+        </div>
+    </div>
+
+    <div class="tasbeeh-layout">
+
+        <div class="tasbeeh-card">
+
+            <span class="tasbeeh-label">عدد التسبيحات</span>
+
+            <div class="tasbeeh-counter" id="tasbeehCount"
+                 aria-live="polite">0</div>
+
+            <div class="tasbeeh-goal">
+                <span>الهدف</span>
+                <strong id="tasbeehGoalText">33</strong>
+            </div>
+
+            <div class="tasbeeh-track">
+                <div class="tasbeeh-track-fill" id="tasbeehProgress"></div>
+            </div>
+
+            <p class="tasbeeh-status" id="tasbeehStatus">
+                ابدأ التسبيح، وكل تسبيحة بتقربك من هدفك.
+            </p>
+
+            <button class="tasbeeh-main-button" id="tasbeehButton"
+                    type="button">
+                سبّح
+            </button>
+
+            <button class="tasbeeh-reset-button" id="tasbeehReset"
+                    type="button">
+                إعادة العداد
+            </button>
+
+        </div>
+
+        <div class="tasbeeh-settings">
+
+            <label for="tasbeehType">اختر الذكر</label>
+
+            <select id="tasbeehType">
+                <option value="سبحان الله">سبحان الله</option>
+                <option value="الحمد لله">الحمد لله</option>
+                <option value="الله أكبر">الله أكبر</option>
+                <option value="أستغفر الله">أستغفر الله</option>
+                <option value="لا إله إلا الله">لا إله إلا الله</option>
+                <option value="اللهم صل وسلم على نبينا محمد">اللهم صل وسلم على نبينا محمد</option>
+            </select>
+
+            <label for="tasbeehGoal">هدف التسبيح</label>
+
+            <select id="tasbeehGoal">
+                <option value="33">33 مرة</option>
+                <option value="100">100 مرة</option>
+                <option value="500">500 مرة</option>
+                <option value="1000">1000 مرة</option>
+            </select>
+
+            <div class="tasbeeh-selected">
+                <span>الذكر الحالي</span>
+                <strong id="tasbeehCurrentType">سبحان الله</strong>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+        <section class="verse-card">
+            <span class="verse-label">آية اليوم</span>
+            <p class="verse-text" id="dailyVerseText">
+                ﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾
+            </p>
+            <span class="verse-reference" id="dailyVerseReference">سورة الرعد - الآية 28</span>
+        </section>
+
+    </main>
+
+    <div class="pwa-status" id="pwaStatus" role="status" aria-live="polite" hidden></div>
+
+    <footer class="site-footer">
+        <p>مِيقات Miqat</p>
+        <span>اللهم أعنّا على ذكرك وشكرك وحسن عبادتك</span>
+        <small>جميع الحقوق محفوظة © مِيقات</small>
+    </footer>
+
+</body>
+</html>

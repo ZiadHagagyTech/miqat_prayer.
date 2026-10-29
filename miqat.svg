@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+<rect width="512" height="512" rx="112" fill="#102b24"/>
+<circle cx="256" cy="215" r="116" fill="#e7c985"/>
+<circle cx="302" cy="178" r="104" fill="#102b24"/>
+<path d="M120 370 Q256 300 392 370 L392 410 L120 410 Z" fill="#e7c985" opacity=".96"/>
+<text x="256" y="388" font-family="Arial, sans-serif" font-size="72" font-weight="700" text-anchor="middle" fill="#102b24">م</text>
+<path d="M150 105 L160 126 L183 129 L166 145 L170 168 L150 157 L130 168 L134 145 L117 129 L140 126 Z" fill="#fff7df"/>
+</svg>
